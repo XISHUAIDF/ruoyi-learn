@@ -1,11 +1,12 @@
-package com.ruoyi.test.service.impl;
+package com.ruoyi.competition.service.imp;
 
-import java.util.List;
+import com.ruoyi.competition.domain.Evaluate;
+import com.ruoyi.competition.mapper.EvaluateMapper;
+import com.ruoyi.competition.service.IEvaluateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.test.mapper.EvaluateMapper;
-import com.ruoyi.test.domain.Evaluate;
-import com.ruoyi.test.service.IEvaluateService;
+
+import java.util.List;
 
 /**
  * 【请填写功能名称】Service业务层处理
@@ -14,7 +15,7 @@ import com.ruoyi.test.service.IEvaluateService;
  * @date 2024-06-19
  */
 @Service
-public class EvaluateServiceImpl implements IEvaluateService 
+public class EvaluateServiceImpl implements IEvaluateService
 {
     @Autowired
     private EvaluateMapper evaluateMapper;

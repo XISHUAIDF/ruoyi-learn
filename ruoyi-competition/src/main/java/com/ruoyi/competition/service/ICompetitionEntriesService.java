@@ -1,7 +1,9 @@
 package com.ruoyi.competitionEntry.service;
 
+
+import com.ruoyi.competition.domain.CompetitionEntries;
+
 import java.util.List;
-import com.ruoyi.competitionEntry.domain.CompetitionEntries;
 
 /**
  * 参赛作品Service接口

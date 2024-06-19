@@ -1,11 +1,14 @@
-package com.ruoyi.competitionEntry.service.impl;
+package com.ruoyi.competition.service.imp;
 
-import java.util.List;
+
+import com.ruoyi.competition.domain.CompetitionEntries;
+import com.ruoyi.competition.mapper.CompetitionEntriesMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.competitionEntry.mapper.CompetitionEntriesMapper;
-import com.ruoyi.competitionEntry.domain.CompetitionEntries;
+
 import com.ruoyi.competitionEntry.service.ICompetitionEntriesService;
+
+import java.util.List;
 
 /**
  * 参赛作品Service业务层处理

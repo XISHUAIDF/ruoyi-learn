@@ -1,7 +1,9 @@
-package com.ruoyi.test.service;
+package com.ruoyi.competition.service;
+
+
+import com.ruoyi.competition.domain.Participants;
 
 import java.util.List;
-import com.ruoyi.test.domain.Participants;
 
 /**
  * 【请填写功能名称】Service接口

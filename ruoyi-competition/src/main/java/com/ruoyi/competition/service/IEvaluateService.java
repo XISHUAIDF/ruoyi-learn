@@ -1,7 +1,9 @@
-package com.ruoyi.test.service;
+package com.ruoyi.competition.service;
+
+
+import com.ruoyi.competition.domain.Evaluate;
 
 import java.util.List;
-import com.ruoyi.test.domain.Evaluate;
 
 /**
  * 【请填写功能名称】Service接口

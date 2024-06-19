@@ -1,11 +1,12 @@
-package com.ruoyi.test.service.impl;
+package com.ruoyi.competition.service.imp;
 
-import java.util.List;
+import com.ruoyi.competition.domain.Participants;
+import com.ruoyi.competition.mapper.ParticipantsMapper;
+import com.ruoyi.competition.service.IParticipantsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.test.mapper.ParticipantsMapper;
-import com.ruoyi.test.domain.Participants;
-import com.ruoyi.test.service.IParticipantsService;
+
+import java.util.List;
 
 /**
  * 【请填写功能名称】Service业务层处理
@@ -14,7 +15,7 @@ import com.ruoyi.test.service.IParticipantsService;
  * @date 2024-06-18
  */
 @Service
-public class ParticipantsServiceImpl implements IParticipantsService 
+public class ParticipantsServiceImpl implements IParticipantsService
 {
     @Autowired
     private ParticipantsMapper participantsMapper;
