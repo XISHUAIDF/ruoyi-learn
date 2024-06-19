@@ -1,3 +1,4 @@
+
 package com.ruoyi.competition.controller;
 
 
@@ -54,7 +55,7 @@ public class EvaluateController extends BaseController
      * 导出【请填写功能名称】列表
      */
     @PreAuthorize("@ss.hasPermi('test:evaluate:export')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.EXPORT)
+    @Log(title = "导出", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, Evaluate evaluate)
     {
@@ -77,7 +78,7 @@ public class EvaluateController extends BaseController
      * 新增【请填写功能名称】
      */
     @PreAuthorize("@ss.hasPermi('test:evaluate:add')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)
+    @Log(title = "新增", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody Evaluate evaluate)
     {
@@ -88,7 +89,7 @@ public class EvaluateController extends BaseController
      * 修改【请填写功能名称】
      */
     @PreAuthorize("@ss.hasPermi('test:evaluate:edit')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.UPDATE)
+    @Log(title = "编辑", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody Evaluate evaluate)
     {
@@ -99,7 +100,7 @@ public class EvaluateController extends BaseController
      * 删除【请填写功能名称】
      */
     @PreAuthorize("@ss.hasPermi('test:evaluate:remove')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.DELETE)
+    @Log(title = "删除", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
     {
