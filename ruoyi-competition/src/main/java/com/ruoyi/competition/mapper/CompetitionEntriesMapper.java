@@ -13,7 +13,7 @@ import java.util.List;
  * @date 2024-06-18
  */
 
-@Mapper
+
 public interface CompetitionEntriesMapper 
 {
     /**

@@ -184,7 +184,6 @@
         <module>ruoyi-generator</module>
         <module>ruoyi-common</module>
         <module>ruoyi-competition</module>
-        <module>ruoyi-competition</module>
     </modules>
     <packaging>pom</packaging>
 

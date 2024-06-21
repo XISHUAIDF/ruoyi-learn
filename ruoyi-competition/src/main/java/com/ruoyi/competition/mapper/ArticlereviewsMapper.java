@@ -1,7 +1,8 @@
 package com.ruoyi.competition.mapper;
 
-import java.util.List;
 import com.ruoyi.competition.domain.Articlereviews;
+
+import java.util.List;
 
 /**
  * 作品评价Mapper接口
