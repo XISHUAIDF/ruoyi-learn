@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.competition.mapper.EvaluateMapper">
+    
+    <resultMap type="Evaluate" id="EvaluateResult">
+        <result property="id"    column="id"    />
+        <result property="school"    column="school"    />
+        <result property="workName"    column="work_name"    />
+        <result property="judgeName"    column="judge_name"    />
+        <result property="teachingImplementation"    column="teaching_implementation"    />
+        <result property="lessonPlan"    column="lesson_plan"    />
+        <result property="videoMaterials"    column="video_materials"    />
+        <result property="professionalTrainingPlan"    column="professional_training_plan"    />
+        <result property="courseStandard"    column="course_standard"    />
+        <result property="textbookSelection"    column="textbook_selection"    />
+        <result property="score"    column="score"    />
+        <result property="evaluationTime"    column="evaluation_time"    />
+    </resultMap>
+
+    <sql id="selectEvaluateVo">
+        select id, school, work_name, judge_name, teaching_implementation, lesson_plan, video_materials, professional_training_plan, course_standard, textbook_selection, score, evaluation_time from evaluate
+    </sql>
+
+    <select id="selectEvaluateList" parameterType="Evaluate" resultMap="EvaluateResult">
+        <include refid="selectEvaluateVo"/>
+        <where>  
+            <if test="school != null  and school != ''"> and school = #{school}</if>
+            <if test="workName != null  and workName != ''"> and work_name like concat('%', #{workName}, '%')</if>
+            <if test="judgeName != null  and judgeName != ''"> and judge_name like concat('%', #{judgeName}, '%')</if>
+            <if test="teachingImplementation != null "> and teaching_implementation = #{teachingImplementation}</if>
+            <if test="lessonPlan != null "> and lesson_plan = #{lessonPlan}</if>
+            <if test="videoMaterials != null "> and video_materials = #{videoMaterials}</if>
+            <if test="professionalTrainingPlan != null "> and professional_training_plan = #{professionalTrainingPlan}</if>
+            <if test="courseStandard != null "> and course_standard = #{courseStandard}</if>
+            <if test="textbookSelection != null "> and textbook_selection = #{textbookSelection}</if>
+            <if test="score != null "> and score = #{score}</if>
+            <if test="evaluationTime != null "> and evaluation_time = #{evaluationTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectEvaluateById" parameterType="Long" resultMap="EvaluateResult">
+        <include refid="selectEvaluateVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertEvaluate" parameterType="Evaluate" useGeneratedKeys="true" keyProperty="id">
+        insert into evaluate
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="school != null and school != ''">school,</if>
+            <if test="workName != null and workName != ''">work_name,</if>
+            <if test="judgeName != null and judgeName != ''">judge_name,</if>
+            <if test="teachingImplementation != null">teaching_implementation,</if>
+            <if test="lessonPlan != null">lesson_plan,</if>
+            <if test="videoMaterials != null">video_materials,</if>
+            <if test="professionalTrainingPlan != null">professional_training_plan,</if>
+            <if test="courseStandard != null">course_standard,</if>
+            <if test="textbookSelection != null">textbook_selection,</if>
+            <if test="score != null">score,</if>
+            <if test="evaluationTime != null">evaluation_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="school != null and school != ''">#{school},</if>
+            <if test="workName != null and workName != ''">#{workName},</if>
+            <if test="judgeName != null and judgeName != ''">#{judgeName},</if>
+            <if test="teachingImplementation != null">#{teachingImplementation},</if>
+            <if test="lessonPlan != null">#{lessonPlan},</if>
+            <if test="videoMaterials != null">#{videoMaterials},</if>
+            <if test="professionalTrainingPlan != null">#{professionalTrainingPlan},</if>
+            <if test="courseStandard != null">#{courseStandard},</if>
+            <if test="textbookSelection != null">#{textbookSelection},</if>
+            <if test="score != null">#{score},</if>
+            <if test="evaluationTime != null">#{evaluationTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateEvaluate" parameterType="Evaluate">
+        update evaluate
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="school != null and school != ''">school = #{school},</if>
+            <if test="workName != null and workName != ''">work_name = #{workName},</if>
+            <if test="judgeName != null and judgeName != ''">judge_name = #{judgeName},</if>
+            <if test="teachingImplementation != null">teaching_implementation = #{teachingImplementation},</if>
+            <if test="lessonPlan != null">lesson_plan = #{lessonPlan},</if>
+            <if test="videoMaterials != null">video_materials = #{videoMaterials},</if>
+            <if test="professionalTrainingPlan != null">professional_training_plan = #{professionalTrainingPlan},</if>
+            <if test="courseStandard != null">course_standard = #{courseStandard},</if>
+            <if test="textbookSelection != null">textbook_selection = #{textbookSelection},</if>
+            <if test="score != null">score = #{score},</if>
+            <if test="evaluationTime != null">evaluation_time = #{evaluationTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteEvaluateById" parameterType="Long">
+        delete from evaluate where id = #{id}
+    </delete>
+
+    <delete id="deleteEvaluateByIds" parameterType="String">
+        delete from evaluate where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

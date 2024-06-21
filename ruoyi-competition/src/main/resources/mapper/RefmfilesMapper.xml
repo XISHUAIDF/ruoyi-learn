@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.competition.mapper.RefmfilesMapper">
+    
+    <resultMap type="Refmfiles" id="RefmfilesResult">
+        <result property="fileId"    column="file_id"    />
+        <result property="filePath"    column="file_path"    />
+        <result property="fileType"    column="file_type"    />
+        <result property="fileName"    column="file_name"    />
+        <result property="fileSize"    column="file_size"    />
+        <result property="participantsId"    column="participants_id"    />
+        <result property="type"    column="type"    />
+    </resultMap>
+
+    <sql id="selectRefmfilesVo">
+        select file_id, file_path, file_type, file_name, file_size, participants_id, type from refmfiles
+    </sql>
+
+    <select id="selectRefmfilesList" parameterType="Refmfiles" resultMap="RefmfilesResult">
+        <include refid="selectRefmfilesVo"/>
+        <where>  
+            <if test="filePath != null  and filePath != ''"> and file_path = #{filePath}</if>
+            <if test="fileType != null  and fileType != ''"> and file_type = #{fileType}</if>
+            <if test="fileName != null  and fileName != ''"> and file_name like concat('%', #{fileName}, '%')</if>
+            <if test="fileSize != null "> and file_size = #{fileSize}</if>
+            <if test="participantsId != null "> and participants_id = #{participantsId}</if>
+            <if test="type != null "> and type = #{type}</if>
+        </where>
+    </select>
+    
+    <select id="selectRefmfilesByFileId" parameterType="Long" resultMap="RefmfilesResult">
+        <include refid="selectRefmfilesVo"/>
+        where file_id = #{fileId}
+    </select>
+
+    <insert id="insertRefmfiles" parameterType="Refmfiles" useGeneratedKeys="true" keyProperty="fileId">
+        insert into refmfiles
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="filePath != null">file_path,</if>
+            <if test="fileType != null">file_type,</if>
+            <if test="fileName != null">file_name,</if>
+            <if test="fileSize != null">file_size,</if>
+            <if test="participantsId != null">participants_id,</if>
+            <if test="type != null">type,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="filePath != null">#{filePath},</if>
+            <if test="fileType != null">#{fileType},</if>
+            <if test="fileName != null">#{fileName},</if>
+            <if test="fileSize != null">#{fileSize},</if>
+            <if test="participantsId != null">#{participantsId},</if>
+            <if test="type != null">#{type},</if>
+         </trim>
+    </insert>
+
+    <update id="updateRefmfiles" parameterType="Refmfiles">
+        update refmfiles
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="filePath != null">file_path = #{filePath},</if>
+            <if test="fileType != null">file_type = #{fileType},</if>
+            <if test="fileName != null">file_name = #{fileName},</if>
+            <if test="fileSize != null">file_size = #{fileSize},</if>
+            <if test="participantsId != null">participants_id = #{participantsId},</if>
+            <if test="type != null">type = #{type},</if>
+        </trim>
+        where file_id = #{fileId}
+    </update>
+
+    <delete id="deleteRefmfilesByFileId" parameterType="Long">
+        delete from refmfiles where file_id = #{fileId}
+    </delete>
+
+    <delete id="deleteRefmfilesByFileIds" parameterType="String">
+        delete from refmfiles where file_id in 
+        <foreach item="fileId" collection="array" open="(" separator="," close=")">
+            #{fileId}
+        </foreach>
+    </delete>
+</mapper>

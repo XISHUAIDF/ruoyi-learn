@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.competition.mapper.CompetitionEntriesMapper">
+    
+    <resultMap type="CompetitionEntries" id="CompetitionEntriesResult">
+        <result property="id"    column="id"    />
+        <result property="school"    column="school"    />
+        <result property="name"    column="name"    />
+        <result property="participantName"    column="participant_name"    />
+        <result property="contactInfo"    column="contact_info"    />
+        <result property="averageScore"    column="average_score"    />
+        <result property="submissionTime"    column="submission_time"    />
+        <result property="competitionGroup"    column="competition_group"    />
+    </resultMap>
+
+    <sql id="selectCompetitionEntriesVo">
+        select id, school, name, participant_name, contact_info, average_score, submission_time, competition_group from competition_entries
+    </sql>
+
+    <select id="selectCompetitionEntriesList" parameterType="CompetitionEntries" resultMap="CompetitionEntriesResult">
+        <include refid="selectCompetitionEntriesVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+        </where>
+    </select>
+    
+    <select id="selectCompetitionEntriesById" parameterType="Long" resultMap="CompetitionEntriesResult">
+        <include refid="selectCompetitionEntriesVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertCompetitionEntries" parameterType="CompetitionEntries" useGeneratedKeys="true" keyProperty="id">
+        insert into competition_entries
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="school != null and school != ''">school,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="participantName != null and participantName != ''">participant_name,</if>
+            <if test="contactInfo != null and contactInfo != ''">contact_info,</if>
+            <if test="averageScore != null">average_score,</if>
+            <if test="submissionTime != null">submission_time,</if>
+            <if test="competitionGroup != null and competitionGroup != ''">competition_group,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="school != null and school != ''">#{school},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="participantName != null and participantName != ''">#{participantName},</if>
+            <if test="contactInfo != null and contactInfo != ''">#{contactInfo},</if>
+            <if test="averageScore != null">#{averageScore},</if>
+            <if test="submissionTime != null">#{submissionTime},</if>
+            <if test="competitionGroup != null and competitionGroup != ''">#{competitionGroup},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCompetitionEntries" parameterType="CompetitionEntries">
+        update competition_entries
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="school != null and school != ''">school = #{school},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="participantName != null and participantName != ''">participant_name = #{participantName},</if>
+            <if test="contactInfo != null and contactInfo != ''">contact_info = #{contactInfo},</if>
+            <if test="averageScore != null">average_score = #{averageScore},</if>
+            <if test="submissionTime != null">submission_time = #{submissionTime},</if>
+            <if test="competitionGroup != null and competitionGroup != ''">competition_group = #{competitionGroup},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCompetitionEntriesById" parameterType="Long">
+        delete from competition_entries where id = #{id}
+    </delete>
+
+    <delete id="deleteCompetitionEntriesByIds" parameterType="String">
+        delete from competition_entries where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
