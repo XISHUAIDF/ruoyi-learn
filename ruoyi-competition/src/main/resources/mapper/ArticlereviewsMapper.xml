@@ -7,6 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <resultMap type="Articlereviews" id="ArticlereviewsResult">
         <result property="id"    column="id"    />
         <result property="participantId"    column="participant_id"    />
+        <result property="evaluateId" column="evaluate_id"/>
         <result property="reviewer"    column="reviewer"    />
         <result property="score"    column="score"    />
         <result property="reviewComments"    column="review_comments"    />
@@ -16,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectArticlereviewsVo">
-        select id, participant_id, reviewer, score, review_comments, created_at, updated_at, status from articlereviews
+        select id, participant_id, reviewer, score, review_comments, created_at, updated_at, status from article_reviews
     </sql>
 
     <select id="selectArticlereviewsList" parameterType="Articlereviews" resultMap="ArticlereviewsResult">
@@ -38,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <insert id="insertArticlereviews" parameterType="Articlereviews" useGeneratedKeys="true" keyProperty="id">
-        insert into articlereviews
+        insert into article_reviews
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="participantId != null">participant_id,</if>
             <if test="reviewer != null and reviewer != ''">reviewer,</if>
@@ -60,7 +61,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
 
     <update id="updateArticlereviews" parameterType="Articlereviews">
-        update articlereviews
+        update article_reviews
         <trim prefix="SET" suffixOverrides=",">
             <if test="participantId != null">participant_id = #{participantId},</if>
             <if test="reviewer != null and reviewer != ''">reviewer = #{reviewer},</if>
@@ -74,11 +75,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <delete id="deleteArticlereviewsById" parameterType="Long">
-        delete from articlereviews where id = #{id}
+        delete from article_reviews where id = #{id}
     </delete>
 
     <delete id="deleteArticlereviewsByIds" parameterType="String">
-        delete from articlereviews where id in 
+        delete from article_reviews where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
