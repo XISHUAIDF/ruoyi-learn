@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.competition.mapper.ParticipantsMapper">
+
+    <resultMap type="Participants" id="ParticipantsResult">
+        <result property="id"    column="id"    />
+        <result property="identity"    column="identity"    />
+        <result property="school"    column="school"    />
+        <result property="name"    column="name"    />
+        <result property="registrationGroup"    column="registration_group"    />
+        <result property="username"    column="username"    />
+        <result property="createdAt"    column="created_at"    />
+        <result property="password"    column="password"    />
+        <result property="informationDisclosure" column="information_disclosure" />
+        <result property="classRecordings" column="class_recordings" />
+        <result property="teachingPlans" column="teaching_plans" />
+        <result property="teachingImplementationReport" column="teaching_implementation_report" />
+        <result property="professionalTrainingProgram" column="professional_training_program" />
+        <result property="courseStandards" column="course_standards" />
+        <result property="textbookSelection" column="textbook_selection" />
+    </resultMap>
+
+    <sql id="selectParticipantsVo">
+        select id, identity, school, name, registration_group, username, created_at,
+            information_disclosure, class_recordings, teaching_plans,
+            teaching_implementation_report, professional_training_program,
+            course_standards, textbook_selection
+        from participants
+    </sql>
+
+    <select id="selectParticipantsList" parameterType="Participants" resultMap="ParticipantsResult">
+        <include refid="selectParticipantsVo"/>
+        <where>
+            <if test="identity != null  and identity != ''"> and identity = #{identity}</if>
+            <if test="school != null  and school != ''"> and school = #{school}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="registrationGroup != null  and registrationGroup != ''"> and registration_group = #{registrationGroup}</if>
+            <if test="username != null  and username != ''"> and username like concat('%', #{username}, '%')</if>
+            <if test="createdAt != null "> and created_at = #{createdAt}</if>
+        </where>
+    </select>
+
+    <select id="selectParticipantsById" parameterType="Long" resultMap="ParticipantsResult">
+        <include refid="selectParticipantsVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertParticipants" parameterType="Participants" useGeneratedKeys="true" keyProperty="id">
+        insert into participants
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="identity != null and identity != ''">identity,</if>
+            <if test="school != null and school != ''">school,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="registrationGroup != null and registrationGroup != ''">registration_group,</if>
+            <if test="username != null and username != ''">username,</if>
+            <if test="createdAt != null">created_at,</if>
+            <if test="informationDisclosure != null">information_disclosure,</if>
+            <if test="classRecordings != null">class_recordings,</if>
+            <if test="teachingPlans != null">teaching_plans,</if>
+            <if test="teachingImplementationReport != null">teaching_implementation_report,</if>
+            <if test="professionalTrainingProgram != null">professional_training_program,</if>
+            <if test="courseStandards != null">course_standards,</if>
+            <if test="textbookSelection != null">textbook_selection,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="identity != null and identity != ''">#{identity},</if>
+            <if test="school != null and school != ''">#{school},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="registrationGroup != null and registrationGroup != ''">#{registrationGroup},</if>
+            <if test="username != null and username != ''">#{username},</if>
+            <if test="createdAt != null">#{createdAt},</if>
+            <if test="informationDisclosure != null">#{informationDisclosure},</if>
+            <if test="classRecordings != null">#{classRecordings},</if>
+            <if test="teachingPlans != null">#{teachingPlans},</if>
+            <if test="teachingImplementationReport != null">#{teachingImplementationReport},</if>
+            <if test="professionalTrainingProgram != null">#{professionalTrainingProgram},</if>
+            <if test="courseStandards != null">#{courseStandards},</if>
+            <if test="textbookSelection != null">#{textbookSelection},</if>
+        </trim>
+    </insert>
+
+    <update id="updateParticipants" parameterType="Participants">
+        update participants
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="identity != null and identity != ''">identity = #{identity},</if>
+            <if test="school != null and school != ''">school = #{school},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="registrationGroup != null and registrationGroup != ''">registration_group = #{registrationGroup},</if>
+            <if test="username != null and username != ''">username = #{username},</if>
+            <if test="createdAt != null">created_at = #{createdAt},</if>
+            <if test="informationDisclosure != null">information_disclosure = #{informationDisclosure},</if>
+            <if test="classRecordings != null">class_recordings = #{classRecordings},</if>
+            <if test="teachingPlans != null">teaching_plans = #{teachingPlans},</if>
+            <if test="teachingImplementationReport != null">teaching_implementation_report = #{teachingImplementationReport},</if>
+            <if test="professionalTrainingProgram != null">professional_training_program = #{professionalTrainingProgram},</if>
+            <if test="courseStandards != null">course_standards = #{courseStandards},</if>
+            <if test="textbookSelection != null">textbook_selection = #{textbookSelection},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteParticipantsById" parameterType="Long">
+        delete from participants where id = #{id}
+    </delete>
+
+    <delete id="deleteParticipantsByIds" parameterType="String">
+        delete from participants where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
