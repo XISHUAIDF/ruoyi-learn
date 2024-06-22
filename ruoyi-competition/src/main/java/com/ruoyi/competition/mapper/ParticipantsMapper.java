@@ -59,4 +59,6 @@ public interface ParticipantsMapper
      * @return 结果
      */
     public int deleteParticipantsByIds(Long[] ids);
+
+
 }

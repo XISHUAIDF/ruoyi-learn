@@ -2,6 +2,7 @@ package com.ruoyi.competition.mapper;
 
 
 import com.ruoyi.competition.domain.Refmfiles;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
  * @author ruoyi
  * @date 2024-06-20
  */
+@Mapper
 public interface RefmfilesMapper 
 {
     /**

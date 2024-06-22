@@ -12,7 +12,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 @Component
 public class
@@ -65,7 +64,7 @@ MinioTemplate implements InitializingBean {
             }
         }
     }
-    public InputStream downloadFile(String objectName) throws Exception {
+    public InputStream downloadFile(String objectName, String targetDirectory) throws Exception {
         try {
             return minioClient.getObject(
                     GetObjectArgs.builder()

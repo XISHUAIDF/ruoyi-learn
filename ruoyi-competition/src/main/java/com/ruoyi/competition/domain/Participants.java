@@ -50,39 +50,7 @@ public class Participants extends BaseEntity
     @Excel(name = "创建时间", dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date createdAt;
 
-    /** 信息公示 */
-    @Excel(name = "信息公示")
-    @NotBlank(message = "信息公示不能为空")
-    private Long    informationDisclosure;
-
-    /** 课堂实录 */
-    @Excel(name = "课堂实录")
-    @NotBlank(message = "课堂实录不能为空")
-    private Long classRecordings;
-
-    /** 教案 */
-    @Excel(name = "教案")
-    @NotBlank(message = "教案不能为空")
-    private Long teachingPlans;
-
-    /** 教学实施报告 */
-    @Excel(name = "教学实施报告")
-    @NotBlank(message = "教学实施报告不能为空")
-    private Long teachingImplementationReport;
-
-    /** 专业人才培养方案 */
-    @Excel(name = "专业人才培养方案")
-    @NotBlank(message = "专业人才培养方案不能为空")
-    private Long professionalTrainingProgram;
-
-    /** 课程标准 */
-    @Excel(name = "课程标准")
-    @NotBlank(message = "课程标准不能为空")
-    private Long courseStandards;
-
-    /** 教材选用说明 */
-    @Excel(name = "教材选用说明")
-    @NotBlank(message = "教材选用说明不能为空")
-    private Long textbookSelection;
+    @Excel(name = "密码")
+    private String password;
 
 }

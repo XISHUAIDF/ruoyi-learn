@@ -1,6 +1,7 @@
 package com.ruoyi.competition.mapper;
 
 import com.ruoyi.competition.domain.Evaluate;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
@@ -10,6 +11,7 @@ import java.util.List;
  * @author zjh
  * @date 2024-06-19
  */
+@Mapper
 public interface EvaluateMapper 
 {
     /**

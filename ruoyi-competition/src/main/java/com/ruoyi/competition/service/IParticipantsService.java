@@ -60,4 +60,6 @@ public interface IParticipantsService
      * @return 结果
      */
     public int deleteParticipantsById(Long id);
+
+    public String importParticipants(List<Participants> participantsList, Boolean isUpdateSupport);
 }

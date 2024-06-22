@@ -1,4 +1,4 @@
-package com.ruoyi.competition.service.imp;
+package com.ruoyi.competition.service;
 
 public interface IParticipantsLoginService {
     public String login(String username, String password, String code, String uuid);

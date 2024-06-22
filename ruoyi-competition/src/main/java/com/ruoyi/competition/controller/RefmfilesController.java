@@ -1,24 +1,17 @@
 package com.ruoyi.competition.controller;
 
 
-import javax.servlet.http.HttpServletResponse;
-
-import com.ruoyi.common.utils.poi.ExcelUtil;
-import com.ruoyi.competition.domain.Refmfiles;
-import com.ruoyi.competition.service.IParticipantsService;
-import com.ruoyi.competition.service.IRefmfilesService;
-import com.ruoyi.competition.utils.OssUtils;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
-import com.ruoyi.common.enums.BusinessType;
-
-
-
 import com.ruoyi.common.core.page.TableDataInfo;
+import com.ruoyi.common.enums.BusinessType;
+import com.ruoyi.competition.domain.Refmfiles;
+import com.ruoyi.competition.service.IRefmfilesService;
+import com.ruoyi.competition.utils.OssUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -62,8 +55,8 @@ public class RefmfilesController extends BaseController
 
     @PreAuthorize("@ss.hasPermi('refmfiles:download')")
     @PostMapping("/download")
-    public AjaxResult download(@RequestParam("fileId") Long fileId) throws Exception {
-        ossUtils.downloadRefmfiles(fileId);
+    public AjaxResult download(@RequestParam("fileId") Long fileId,String targetDirectory) throws Exception {
+        ossUtils.downloadRefmfiles(fileId,targetDirectory);
         return AjaxResult.success();
     }
 

@@ -6,17 +6,12 @@ import com.ruoyi.competition.config.MinioTemplate;
 import com.ruoyi.competition.domain.Refmfiles;
 import com.ruoyi.competition.exception.OssException;
 import com.ruoyi.competition.service.IRefmfilesService;
-
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
 @Component
 public class OssUtils {
 
@@ -50,10 +45,10 @@ public class OssUtils {
     };
 
 
-    public Boolean downloadRefmfiles(Long fileId) throws Exception {
+    public Boolean downloadRefmfiles(Long fileId,String targetDirectory) throws Exception {
         Refmfiles refmfiles = new Refmfiles();
         refmfiles = iRefmfilesService.selectRefmfilesByFileId(fileId);
-        minioTemplate.downloadFile(refmfiles.getFileName());
+        minioTemplate.downloadFile(refmfiles.getFileName(),targetDirectory);
         return true;
     }
 
