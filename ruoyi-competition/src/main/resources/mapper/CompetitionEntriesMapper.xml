@@ -1,31 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.competition.mapper.CompetitionEntriesMapper">
-    
+
     <resultMap type="CompetitionEntries" id="CompetitionEntriesResult">
         <result property="id"    column="id"    />
         <result property="school"    column="school"    />
+        <result property="cover_page" column="coverPage"/>
         <result property="name"    column="name"    />
         <result property="participantName"    column="participant_name"    />
         <result property="contactInfo"    column="contact_info"    />
         <result property="averageScore"    column="average_score"    />
         <result property="submissionTime"    column="submission_time"    />
+        <result property="registerGroup"    column="register_group" />
         <result property="competitionGroup"    column="competition_group"    />
+        <result property="informationDisclosure" column="information_disclosure" />
+        <result property="classRecordings" column="class_recordings" />
+        <result property="teachingPlans" column="teaching_plans" />
+        <result property="teachingImplementationReport" column="teaching_implementation_report" />
+        <result property="professionalTrainingProgram" column="professional_training_program" />
+        <result property="courseStandards" column="course_standards" />
+        <result property="textbookSelection" column="textbook_selection" />
     </resultMap>
 
     <sql id="selectCompetitionEntriesVo">
-        select id, school, name, participant_name, contact_info, average_score, submission_time, competition_group from competition_entries
+        select id, school, name, participant_name, contact_info, average_score, submission_time, competition_group, information_disclosure, class_recordings, teaching_plans, teaching_implementation_report, professional_training_program, course_standards, textbook_selection from competition_entries
     </sql>
 
     <select id="selectCompetitionEntriesList" parameterType="CompetitionEntries" resultMap="CompetitionEntriesResult">
         <include refid="selectCompetitionEntriesVo"/>
-        <where>  
+        <where>
             <if test="id != null "> and id = #{id}</if>
         </where>
     </select>
-    
+
     <select id="selectCompetitionEntriesById" parameterType="Long" resultMap="CompetitionEntriesResult">
         <include refid="selectCompetitionEntriesVo"/>
         where id = #{id}
@@ -41,7 +50,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="averageScore != null">average_score,</if>
             <if test="submissionTime != null">submission_time,</if>
             <if test="competitionGroup != null and competitionGroup != ''">competition_group,</if>
-         </trim>
+            <if test="informationDisclosure != null">information_disclosure,</if>
+            <if test="classRecordings != null">class_recordings,</if>
+            <if test="teachingPlans != null">teaching_plans,</if>
+            <if test="teachingImplementationReport != null">teaching_implementation_report,</if>
+            <if test="professionalTrainingProgram != null">professional_training_program,</if>
+            <if test="courseStandards != null">course_standards,</if>
+            <if test="textbookSelection != null">textbook_selection,</if>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="school != null and school != ''">#{school},</if>
             <if test="name != null and name != ''">#{name},</if>
@@ -50,7 +66,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="averageScore != null">#{averageScore},</if>
             <if test="submissionTime != null">#{submissionTime},</if>
             <if test="competitionGroup != null and competitionGroup != ''">#{competitionGroup},</if>
-         </trim>
+            <if test="informationDisclosure != null">#{informationDisclosure},</if>
+            <if test="classRecordings != null">#{classRecordings},</if>
+            <if test="teachingPlans != null">#{teachingPlans},</if>
+            <if test="teachingImplementationReport != null">#{teachingImplementationReport},</if>
+            <if test="professionalTrainingProgram != null">#{professionalTrainingProgram},</if>
+            <if test="courseStandards != null">#{courseStandards},</if>
+            <if test="textbookSelection != null">#{textbookSelection},</if>
+        </trim>
     </insert>
 
     <update id="updateCompetitionEntries" parameterType="CompetitionEntries">
@@ -63,6 +86,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="averageScore != null">average_score = #{averageScore},</if>
             <if test="submissionTime != null">submission_time = #{submissionTime},</if>
             <if test="competitionGroup != null and competitionGroup != ''">competition_group = #{competitionGroup},</if>
+            <if test="informationDisclosure != null">information_disclosure = #{informationDisclosure},</if>
+            <if test="classRecordings != null">class_recordings = #{classRecordings},</if>
+            <if test="teachingPlans != null">teaching_plans = #{teachingPlans},</if>
+            <if test="teachingImplementationReport != null">teaching_implementation_report = #{teachingImplementationReport},</if>
+            <if test="professionalTrainingProgram != null">professional_training_program = #{professionalTrainingProgram},</if>
+            <if test="courseStandards != null">course_standards = #{courseStandards},</if>
+            <if test="textbookSelection != null">textbook_selection = #{textbookSelection},</if>
         </trim>
         where id = #{id}
     </update>
@@ -72,7 +102,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteCompetitionEntriesByIds" parameterType="String">
-        delete from competition_entries where id in 
+        delete from competition_entries where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
