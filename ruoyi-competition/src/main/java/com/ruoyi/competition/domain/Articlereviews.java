@@ -18,38 +18,38 @@ public class Articlereviews extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** $column.columnComment */
+    /** ID */
     private Long id;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 参与者ID */
+    @Excel(name = "参与者ID")
     private Long participantId;
 
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private Long evaluteId;
+    @Excel(name = "评价ID")
+    private Long evaluateId;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 评论人 */
+    @Excel(name = "评论人")
     private String reviewer;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 分数 */
+    @Excel(name = "分数")
     private BigDecimal score;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 评论 */
+    @Excel(name = "评论")
     private String reviewComments;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 创建时间 */
+    @Excel(name = "创建时间", dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date createdAt;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 更新时间 */
+    @Excel(name = "更新时间", dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date updatedAt;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 状态 */
+    @Excel(name = "状态")
     private String status;
 
     public void setId(Long id) 
