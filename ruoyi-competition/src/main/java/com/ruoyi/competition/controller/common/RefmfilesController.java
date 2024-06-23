@@ -1,4 +1,4 @@
-package com.ruoyi.competition.controller;
+package com.ruoyi.competition.controller.common;
 
 
 import com.ruoyi.common.annotation.Log;
@@ -9,12 +9,18 @@ import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.competition.domain.Refmfiles;
 import com.ruoyi.competition.service.IRefmfilesService;
 import com.ruoyi.competition.utils.OssUtils;
+import org.apache.poi.util.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
 /**
@@ -24,7 +30,7 @@ import java.util.List;
  * @date 2024-06-20
  */
 @RestController
-@RequestMapping("/system/refmfiles")
+@RequestMapping("/test/refmfiles")
 public class RefmfilesController extends BaseController
 {
     @Autowired
@@ -50,16 +56,45 @@ public class RefmfilesController extends BaseController
    @PostMapping("/upload")
    public AjaxResult upload(@RequestParam("file") MultipartFile file) throws IOException {
        String fileAddress=ossUtils.uploadRefmfiles(file);
-       return AjaxResult.success(fileAddress);
+       return AjaxResult.success("恭喜你成功上传"+fileAddress);
    }
 
     @PreAuthorize("@ss.hasPermi('refmfiles:download')")
     @PostMapping("/download")
-    public AjaxResult download(@RequestParam("fileId") Long fileId,String targetDirectory) throws Exception {
-        ossUtils.downloadRefmfiles(fileId,targetDirectory);
+    public AjaxResult download(HttpServletResponse response,@RequestParam("fileId") Long fileId) throws Exception {
+        InputStream inputStream = ossUtils.downloadRefmfiles(fileId);
+        if (inputStream == null) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return AjaxResult.error("文件未找到");
+        }
+
+        filestruct(fileId,response);
+
+        try (OutputStream outputStream = response.getOutputStream()) {
+            IOUtils.copy(inputStream, outputStream);
+            outputStream.flush();
+        } finally {
+            inputStream.close();
+        }
         return AjaxResult.success();
     }
 
+    private  HttpServletResponse filestruct(Long fileId ,HttpServletResponse response) throws UnsupportedEncodingException {
+        Refmfiles file = new Refmfiles();
+        file = refmfilesService.selectRefmfilesByFileId(fileId);
+
+        String fileName = file.getFileName();
+        int dotIndex = fileName.lastIndexOf('.');
+        String an = fileName.substring(dotIndex + 1);
+        if (an.equals("pdf"))  {
+            response.setContentType("application/pdf");
+
+        }else {
+            response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document"); // 设置响应内容类型为 Word
+    }
+        response.setHeader("Content-Disposition", "attachment; filename=\"" + URLEncoder.encode("ASDASD", "GBK") +"\"");
+        return  response;
+    }
 
 
     /**
