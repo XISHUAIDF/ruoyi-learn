@@ -3,10 +3,9 @@ package com.ruoyi.competition.service.imp;
 
 import com.ruoyi.competition.domain.CompetitionEntries;
 import com.ruoyi.competition.mapper.CompetitionEntriesMapper;
+import com.ruoyi.competition.service.ICompetitionEntriesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.ruoyi.competitionEntry.service.ICompetitionEntriesService;
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ import java.util.List;
  * @date 2024-06-18
  */
 @Service
-public class CompetitionEntriesServiceImpl implements ICompetitionEntriesService 
+public class CompetitionEntriesServiceImpl implements ICompetitionEntriesService
 {
     @Autowired
     private CompetitionEntriesMapper competitionEntriesMapper;

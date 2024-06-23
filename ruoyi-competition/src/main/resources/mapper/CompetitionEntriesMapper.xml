@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.competition.mapper.CompetitionEntriesMapper">
 
-    <resultMap type="CompetitionEntries" id="CompetitionEntriesResult">
+    <resultMap type="CompetitionEntries" id="CompetitionEntries">
         <result property="id"    column="id"    />
         <result property="school"    column="school"    />
         <result property="cover_page" column="coverPage"/>
@@ -28,14 +28,14 @@
         select id, school, name, participant_name, contact_info, average_score, submission_time, competition_group, information_disclosure, class_recordings, teaching_plans, teaching_implementation_report, professional_training_program, course_standards, textbook_selection from competition_entries
     </sql>
 
-    <select id="selectCompetitionEntriesList" parameterType="CompetitionEntries" resultMap="CompetitionEntriesResult">
+    <select id="selectCompetitionEntriesList" parameterType="CompetitionEntries" resultMap="CompetitionEntries">
         <include refid="selectCompetitionEntriesVo"/>
         <where>
             <if test="id != null "> and id = #{id}</if>
         </where>
     </select>
 
-    <select id="selectCompetitionEntriesById" parameterType="Long" resultMap="CompetitionEntriesResult">
+    <select id="selectCompetitionEntriesById" parameterType="Long" resultMap="CompetitionEntries">
         <include refid="selectCompetitionEntriesVo"/>
         where id = #{id}
     </select>
