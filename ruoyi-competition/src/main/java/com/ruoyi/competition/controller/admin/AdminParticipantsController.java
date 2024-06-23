@@ -27,8 +27,8 @@ import java.util.stream.Collectors;
  * @date 2024-06-18
  */
 @RestController
-@RequestMapping("/test/participants")
-public class ParticipantsController extends BaseController
+@RequestMapping("/admin/participants")
+public class AdminParticipantsController extends BaseController
 {
     @Autowired
     private IParticipantsService participantsService;
@@ -54,7 +54,7 @@ public class ParticipantsController extends BaseController
     @PreAuthorize("@ss.hasPermi('test:participants:export')")
     @Log(title = "导出excel", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, @Valid @RequestBody ParticipantsVO participantsVO)
+    public void export(HttpServletResponse response, @RequestBody ParticipantsVO participantsVO)
     {
         Participants participants = new Participants();
         BeanUtils.copyProperties(participantsVO, participants);
