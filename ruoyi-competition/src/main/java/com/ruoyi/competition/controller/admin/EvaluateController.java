@@ -6,6 +6,7 @@ import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
+import com.ruoyi.common.core.redis.RedisCache;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.competition.domain.Evaluate;
@@ -24,12 +25,14 @@ import java.util.List;
  * @date 2024-06-19
  */
 @RestController
-@RequestMapping("/test/evaluate")
+@RequestMapping("/admin/evaluate")
 public class EvaluateController extends BaseController
 {
     @Autowired
     private IEvaluateService evaluateService;
 
+    @Autowired
+    private RedisCache redisCache;
     /**
      * 查询【请填写功能名称】列表
      */
@@ -42,6 +45,11 @@ public class EvaluateController extends BaseController
         return getDataTable(list);
     }
 
+    @PostMapping("/send/contacts")
+    public String Send(@RequestBody String content){
+        redisCache.setCacheObject("Contact",content);
+        return "已备份，请放心";
+    }
     /**
      * 导出【请填写功能名称】列表
      */
