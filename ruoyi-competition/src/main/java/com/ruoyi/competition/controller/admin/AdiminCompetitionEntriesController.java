@@ -7,6 +7,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.competition.domain.CompetitionEntries;
+import com.ruoyi.competition.service.ICompetitionEntriesService;
 import com.ruoyi.competition.vo.CompetitionEntriesVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +24,11 @@ import java.util.stream.Collectors;
  * @Date 2024-06-18
  */
 @RestController
-@RequestMapping("/test/entries")
-public class CompetitionEntriesController extends BaseController {
+@RequestMapping("/admin/entries")
+public class AdiminCompetitionEntriesController extends BaseController {
 
     @Autowired
-    private com.ruoyi.competitionEntry.service.ICompetitionEntriesService competitionEntriesService;
+    private ICompetitionEntriesService competitionEntriesService;
 
     /**
      * 查询参赛作品列表

@@ -1,4 +1,4 @@
-package com.ruoyi.competitionEntry.service;
+package com.ruoyi.competition.service;
 
 
 import com.ruoyi.competition.domain.CompetitionEntries;
