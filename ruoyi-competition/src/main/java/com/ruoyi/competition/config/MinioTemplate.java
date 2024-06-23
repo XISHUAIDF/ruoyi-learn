@@ -64,7 +64,7 @@ MinioTemplate implements InitializingBean {
             }
         }
     }
-    public InputStream downloadFile(String objectName, String targetDirectory) throws Exception {
+    public InputStream downloadFile(String objectName) throws Exception {
         try {
             return minioClient.getObject(
                     GetObjectArgs.builder()

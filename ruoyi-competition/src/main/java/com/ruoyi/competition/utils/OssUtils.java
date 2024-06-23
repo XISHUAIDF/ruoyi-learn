@@ -12,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.io.InputStream;
+
 @Component
 public class OssUtils {
 
@@ -20,7 +22,7 @@ public class OssUtils {
 
     @Resource
     private IRefmfilesService iRefmfilesService;
-    private static final String filePath_Prefix = "F:\\minioPath";
+    private static final String filePath_Prefix = "minioPath";
 
     public String uploadRefmfiles(MultipartFile file) throws IOException {
         if (file.isEmpty()) {
@@ -45,11 +47,11 @@ public class OssUtils {
     };
 
 
-    public Boolean downloadRefmfiles(Long fileId,String targetDirectory) throws Exception {
+    public InputStream downloadRefmfiles(Long fileId) throws Exception {
         Refmfiles refmfiles = new Refmfiles();
         refmfiles = iRefmfilesService.selectRefmfilesByFileId(fileId);
-        minioTemplate.downloadFile(refmfiles.getFileName(),targetDirectory);
-        return true;
+        minioTemplate.downloadFile(refmfiles.getFilePath());
+        return  minioTemplate.downloadFile(refmfiles.getFilePath());
     }
 
 
