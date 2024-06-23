@@ -75,11 +75,6 @@ public class LoginUser implements UserDetails
     {
     }
 
-    public LoginUser(SysUser user, Set<String> permissions)
-    {
-        this.user = user;
-        this.permissions = permissions;
-    }
 
     public LoginUser(Long userId, Long deptId, SysUser user, Set<String> permissions)
     {
