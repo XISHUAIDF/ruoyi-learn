@@ -52,5 +52,6 @@ public class Participants extends BaseEntity
 
     @Excel(name = "密码")
     private String password;
-
+    @Excel(name = "参赛团队")
+    private String competitionGroup;
 }

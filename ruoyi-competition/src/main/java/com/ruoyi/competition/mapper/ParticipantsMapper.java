@@ -1,6 +1,7 @@
 package com.ruoyi.competition.mapper;
 
 import com.ruoyi.competition.domain.Participants;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
@@ -10,6 +11,7 @@ import java.util.List;
  * @author zjh
  * @date 2024-06-18
  */
+@Mapper
 public interface ParticipantsMapper 
 {
     /**
@@ -20,6 +22,7 @@ public interface ParticipantsMapper
      */
     public Participants selectParticipantsById(Long id);
 
+    public Participants selectParticipantsByUsername(String username);
     /**
      * 查询【请填写功能名称】列表
      * 

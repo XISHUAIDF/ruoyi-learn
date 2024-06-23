@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 @Data
 public class ParticipantsVO {
+    private String id;
     @Excel(name = "身份")
     @NotBlank(message = "身份不能为空")
     private String identity;

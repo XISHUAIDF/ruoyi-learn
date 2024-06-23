@@ -1,6 +1,7 @@
 package com.ruoyi.competition.service.imp;
 
 import com.ruoyi.common.exception.ServiceException;
+import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.bean.BeanValidators;
 import com.ruoyi.competition.domain.Participants;
@@ -66,6 +67,10 @@ public class ParticipantsServiceImpl implements IParticipantsService
     @Override
     public int insertParticipants(Participants participants)
     {
+        if (!StringUtils.isNull(participants.getPassword())){
+            String password = SecurityUtils.encryptPassword(participants.getPassword());
+            participants.setPassword(password);
+        }
         return participantsMapper.insertParticipants(participants);
     }
 
@@ -78,9 +83,16 @@ public class ParticipantsServiceImpl implements IParticipantsService
     @Override
     public int updateParticipants(Participants participants)
     {
+        if (!StringUtils.isNull(participants.getPassword())){
+            String password = SecurityUtils.encryptPassword(participants.getPassword());
+            participants.setPassword(password);
+        }
         return participantsMapper.updateParticipants(participants);
     }
-
+     @Override
+    public Participants selectParticipantsByUsername(String username){
+        return participantsMapper.selectParticipantsByUsername(username);
+     };
     /**
      * 批量删除【请填写功能名称】
      * 
@@ -122,19 +134,23 @@ public class ParticipantsServiceImpl implements IParticipantsService
             try
             {
                 // 验证是否存在这个参与者
-                Participants existingParticipant = participantsMapper.selectParticipantsById(participants.getId());
-                if (StringUtils.isNull(existingParticipant))
+                Participants existingParticipant = participantsMapper.selectParticipantsByUsername(participants.getUsername());
+                if (existingParticipant == null)
                 {
                     BeanValidators.validateWithException(validator, participants);
                     Boolean checkResult=checkIdentityAndRegistrationGroup(participants);
-                    if(true){
+                    if(checkResult){
                         participants.setPassword("123456");
                         participants.setCreateTime(new Date());
+                        if (!StringUtils.isNull(participants.getPassword())){
+                            String password = SecurityUtils.encryptPassword(participants.getPassword());
+                            participants.setPassword(password);
+                        }
                         participantsMapper.insertParticipants(participants);
-
                         successNum++;
                         successMsg.append("<br/>" + successNum + "、账号 " + participants.getUsername() + " 导入成功");}
                 }
+
                 else if (isUpdateSupport)
                 {
                     BeanValidators.validateWithException(validator, participants);
@@ -169,6 +185,7 @@ public class ParticipantsServiceImpl implements IParticipantsService
         }
         return successMsg.toString();
     }
+
     public boolean checkIdentityAndRegistrationGroup(Participants participants) {
         // 验证身份是否为 "教师" 或 "评委"
         if (!"教师".equals(participants.getIdentity()) && !"评委".equals(participants.getIdentity())) {
