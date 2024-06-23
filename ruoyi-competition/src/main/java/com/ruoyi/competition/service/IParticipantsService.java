@@ -20,7 +20,7 @@ public interface IParticipantsService
      * @return 【请填写功能名称】
      */
     public Participants selectParticipantsById(Long id);
-
+    public Participants selectParticipantsByUsername(String username);
     /**
      * 查询【请填写功能名称】列表
      * 
