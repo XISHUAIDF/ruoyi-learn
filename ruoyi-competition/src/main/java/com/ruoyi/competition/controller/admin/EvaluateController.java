@@ -45,11 +45,6 @@ public class EvaluateController extends BaseController
         return getDataTable(list);
     }
 
-    @PostMapping("/send/contacts")
-    public String Send(@RequestBody String content){
-        redisCache.setCacheObject("Contact",content);
-        return "已备份，请放心";
-    }
     /**
      * 导出【请填写功能名称】列表
      */

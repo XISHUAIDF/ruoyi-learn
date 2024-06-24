@@ -12,9 +12,11 @@ import com.ruoyi.competition.vo.CompetitionEntriesVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,6 +27,7 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping("/admin/entries")
+@Validated
 public class AdiminCompetitionEntriesController extends BaseController {
 
     @Autowired
@@ -76,7 +79,7 @@ public class AdiminCompetitionEntriesController extends BaseController {
     @PreAuthorize("@ss.hasPermi('test:entries:add')")
     @Log(title = "参赛作品", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody CompetitionEntriesVO competitionEntriesVO) {
+    public AjaxResult add(@RequestBody @Valid CompetitionEntriesVO competitionEntriesVO) {
         CompetitionEntries competitionEntries = new CompetitionEntries();
         BeanUtils.copyProperties(competitionEntriesVO, competitionEntries);
         return toAjax(competitionEntriesService.insertCompetitionEntries(competitionEntries));
@@ -88,7 +91,7 @@ public class AdiminCompetitionEntriesController extends BaseController {
     @PreAuthorize("@ss.hasPermi('test:entries:edit')")
     @Log(title = "参赛作品", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody CompetitionEntriesVO competitionEntriesVO) {
+    public AjaxResult edit(@RequestBody @Valid CompetitionEntriesVO competitionEntriesVO) {
         CompetitionEntries competitionEntries = new CompetitionEntries();
         BeanUtils.copyProperties(competitionEntriesVO, competitionEntries);
         return toAjax(competitionEntriesService.updateCompetitionEntries(competitionEntries));

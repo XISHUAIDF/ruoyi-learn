@@ -1,11 +1,11 @@
-package com.ruoyi.competition.domain;
+package com.ruoyi.competition.model;
 
 import com.ruoyi.common.core.domain.model.LoginUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-
+/*登录用*/
 public class ParticipantsLoginUser extends LoginUser implements UserDetails {
     private static final long serialVersionUID = 1L;
 

@@ -1,7 +1,7 @@
 package com.ruoyi.framework.web.service;
 
 import com.ruoyi.competition.domain.Participants;
-import com.ruoyi.competition.domain.ParticipantsLoginUser;
+import com.ruoyi.competition.model.ParticipantsLoginUser;
 import com.ruoyi.competition.mapper.ParticipantsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

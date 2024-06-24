@@ -1,4 +1,4 @@
-package com.ruoyi.web.controller.common;
+package com.ruoyi.web.controller.monitor;
 
 import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.core.domain.AjaxResult;

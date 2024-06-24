@@ -59,6 +59,7 @@ public class AdminParticipantsController extends BaseController
         Participants participants = new Participants();
         BeanUtils.copyProperties(participantsVO, participants);
         List<Participants> list = participantsService.selectParticipantsList(participants);
+
         List<ParticipantsVO> voList = list.stream().map(this::convertToVO).collect(Collectors.toList());
         ExcelUtil<ParticipantsVO> util = new ExcelUtil<>(ParticipantsVO.class);
         util.exportExcel(response, voList, "导出excel数据");
@@ -69,6 +70,7 @@ public class AdminParticipantsController extends BaseController
     public AjaxResult importParticipantsData(MultipartFile file, boolean updateSupport) throws Exception {
         ExcelUtil<Participants> util = new ExcelUtil<>(Participants.class);
         List<Participants> participantsList = util.importExcel(file.getInputStream());
+
         String operName = getUsername();
         String message = participantsService.importParticipants(participantsList, updateSupport);
         return AjaxResult.success(message);

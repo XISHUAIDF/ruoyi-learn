@@ -19,42 +19,58 @@ public class CompetitionEntries extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** $column.columnComment */
     private Long id;
+
+    /**
+     * 作品图片
+     */
     @Excel(name = "作品图片")
     private String CoverPage;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /**
+     * 学校
+     */
+    @Excel(name = "学校")
     private String school;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /**
+     * 姓名
+     */
+    @Excel(name = "姓名")
     private String name;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /**
+     * 参赛人员
+     */
+    @Excel(name = "参赛人员")
     private String participantName;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /**
+     * 联系信息
+     */
+    @Excel(name = "联系信息")
     private String contactInfo;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /**
+     * 平均分数
+     */
+    @Excel(name = "平均分数")
     private BigDecimal averageScore;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /**
+     * 提交时间
+     */
+    @Excel(name = "提交时间")
     private Date submissionTime;
 
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /**
+     * 注册组
+     */
+    @Excel(name = "注册组")
     private String registerGroup;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    @Excel(name = "参赛团队")
     private String competitionGroup;
-
 
     @Excel(name = "信息公示")
     @NotBlank(message = "信息公示不能为空")

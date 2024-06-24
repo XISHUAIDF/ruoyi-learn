@@ -11,9 +11,11 @@ import com.ruoyi.competition.domain.Participants;
 import com.ruoyi.competition.service.IParticipantsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -24,6 +26,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/test/participants")
+@Validated
 public class ParticipantsController extends BaseController
 {
     @Autowired
@@ -70,7 +73,7 @@ public class ParticipantsController extends BaseController
     @PreAuthorize("@ss.hasPermi('test:participants:add')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody Participants participants)
+    public AjaxResult add(@RequestBody @Valid Participants participants)
     {
         return toAjax(participantsService.insertParticipants(participants));
     }
@@ -81,7 +84,7 @@ public class ParticipantsController extends BaseController
     @PreAuthorize("@ss.hasPermi('test:participants:edit')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody Participants participants)
+    public AjaxResult edit(@RequestBody @Valid Participants participants)
     {
         return toAjax(participantsService.updateParticipants(participants));
     }
