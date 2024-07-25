@@ -33,6 +33,11 @@ public class AdiminCompetitionEntriesController extends BaseController {
     @Autowired
     private ICompetitionEntriesService competitionEntriesService;
 
+
+    @GetMapping("HELL")
+    public String test(){
+        return "gell";
+    }
     /**
      * 查询参赛作品列表
      */
