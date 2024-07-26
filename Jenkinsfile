@@ -2,7 +2,6 @@ pipeline {
     agent {
         // 使用 Docker 中的 Jenkins agent
         docker {
-            image 'maven:3.8.1-jdk-11'
             label 'docker-agent'
             args '-v /var/run/docker.sock:/var/run/docker.sock'
         }
@@ -14,7 +13,7 @@ pipeline {
         DOCKER_IMAGE = 'ruoyi'
         DOCKER_TAG = 'latest'
         // Git 仓库地址
-        GIT_REPO = 'https://github.com/your-username/your-repo.git'
+        GIT_REPO = 'https://github.com/XISHUAIDF/ruoyi-learn.git'
         // Git 分支
         GIT_BRANCH = 'main'
     }
