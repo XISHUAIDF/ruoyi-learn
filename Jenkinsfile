@@ -6,6 +6,8 @@ pipeline {
         // Docker 镜像的名称和版本
         DOCKER_IMAGE = 'ruoyi'
         DOCKER_TAG = 'latest'
+        // Docker Registry 登录凭据 ID
+        DOCKER_CREDENTIALS_ID = 'dockerhub-credentials'
         // Git 仓库地址
         GIT_REPO = 'https://github.com/XISHUAIDF/ruoyi-learn.git'
         // Git 分支
@@ -24,20 +26,23 @@ pipeline {
             steps {
                 // 使用 Docker 构建镜像
                 script {
-                    docker.build("${env.DOCKER_IMAGE}:${env.DOCKER_TAG}")
+                    def customImage = docker.build("${env.DOCKER_IMAGE}:${env.DOCKER_TAG}")
                 }
             }
         }
 
-}
+    }
 
-  post {
+    post {
+        success {
+            echo 'Build and Push Successful!'
+        }
+        failure {
+            echo 'Build or Push Failed!'
+        }
         always {
             // 清理工作区
             cleanWs()
         }
     }
-
 }
-
-
