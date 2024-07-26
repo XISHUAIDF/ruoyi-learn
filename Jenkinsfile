@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'jenkins-agent' } 
+    agent any
 
     // 定义环境变量
     environment {
