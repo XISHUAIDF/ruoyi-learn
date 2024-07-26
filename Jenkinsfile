@@ -1,11 +1,5 @@
 pipeline {
-    agent {
-        // 使用 Docker 中的 Jenkins agent
-        docker {
-            label 'docker-agent'
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
-        }
-    }
+    agent any
 
     // 定义环境变量
     environment {
@@ -35,12 +29,14 @@ pipeline {
             }
         }
 
-    post {
-        always {
-            // 清理工作区
-            cleanWs()
+        stage("clean"){  
+            post {
+                always {
+                    // 清理工作区
+                    cleanWs()
+                }
+            }
         }
-    }
 }
 
 }
