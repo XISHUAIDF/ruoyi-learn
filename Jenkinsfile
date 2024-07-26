@@ -31,8 +31,18 @@ pipeline {
             }
         }
 
+    
+        
+        stage('Deploy our image') {
+            steps{
+                script {
+                    docker.withRegistry( '', registryCredential ) {
+                    customImage.push()
+                    }
+                    }
+        }
+        }
     }
-
     post {
         success {
             echo 'Build and Push Successful!'
