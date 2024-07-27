@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+     tools {
+        maven 'MAVEN' // 指定你的Maven版本
+    }
+
     // 定义环境变量
     environment {
         // Docker 镜像的名称和版本
@@ -22,6 +26,14 @@ pipeline {
             }
         }
 
+        stage('Build') {
+                    steps {
+                        script {
+                            // 使用Maven构建项目
+                            sh 'mvn clean install'
+                        }
+                    }
+                }
         stage('Build Docker Image') {
             steps {
                 // 使用 Docker 构建镜像
@@ -36,7 +48,7 @@ pipeline {
         stage('Deploy our image') {
             steps{
                 script {
-                    docker.withRegistry( '', registryCredential ) {
+                    docker.withRegistry( '' ) {
                     customImage.push()
                     }
                     }
