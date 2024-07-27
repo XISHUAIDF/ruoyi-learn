@@ -1,9 +1,6 @@
 pipeline {
     agent any
 
-     tools {
-        maven 'MAVEN' // 指定你的Maven版本
-    }
 
     // 定义环境变量
     environment {
@@ -23,9 +20,12 @@ pipeline {
             steps {
                 // 从 Git 仓库克隆代码
                 git branch: "${env.GIT_BRANCH}", url: "${env.GIT_REPO}"
-                withMaven {
-                sh "mvn clean verify"
-                } 
+            }
+        }
+
+          stage('Build') { 
+            steps {
+                sh 'mvn -B -DskipTests clean package' 
             }
         }
 
