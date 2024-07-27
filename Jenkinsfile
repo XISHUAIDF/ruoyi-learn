@@ -23,17 +23,13 @@ pipeline {
             steps {
                 // 从 Git 仓库克隆代码
                 git branch: "${env.GIT_BRANCH}", url: "${env.GIT_REPO}"
+                withMaven {
+                sh "mvn clean verify"
+                } 
             }
         }
 
-        stage('Build') {
-                    steps {
-                        script {
-                            // 使用Maven构建项目
-                            sh 'mvn clean install'
-                        }
-                    }
-                }
+      
         stage('Build Docker Image') {
             steps {
                 // 使用 Docker 构建镜像
