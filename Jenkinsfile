@@ -1,5 +1,5 @@
 pipeline {
-    agent { dockerfile true }
+    agent any
     
     environment {
         TEST_VAR = 'This is a test variable'  // Example environment variable
