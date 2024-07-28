@@ -1,5 +1,5 @@
 pipeline {
-    agent { dockerfile true }
+    agent any
     
     environment {
         TEST_VAR = 'This is a test variable'  // Example environment variable
@@ -13,10 +13,7 @@ pipeline {
         }
      stage('Build image') {
             steps {
-                script {
-                    // Build the Docker image using the Dockerfile in the current directory
-                    docker.build("my-ubuntu-base")
-                }
+                powershell 'docker build -t mynodeapp:latest .'
             }
         }
 
