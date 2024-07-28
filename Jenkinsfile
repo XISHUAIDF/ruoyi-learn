@@ -3,9 +3,7 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-              bat """
-				cd /d "echo asda"
-				"""
+             mvn install
             }
         }
     }
