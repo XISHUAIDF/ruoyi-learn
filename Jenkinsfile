@@ -3,8 +3,9 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                bat 'mvn -v'
-                bat 'mvn clean install'
+              bat """
+				cd /d "echo asda"
+				"""
             }
         }
     }
