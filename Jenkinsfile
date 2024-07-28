@@ -12,11 +12,10 @@ pipeline {
             }
         }
 
-        stage('Build image') {
-        // If you have multiple Dockerfiles in your Project, use this:
-        // app = docker.build("my-ubuntu-base", "-f Dockerfile.base .")
+        stage('Build image') {steps{  app = docker.build("my-ubuntu-base")}
+      
 
-        app = docker.build("my-ubuntu-base")
+      
     }
     }
 }
