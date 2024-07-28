@@ -11,11 +11,14 @@ pipeline {
                 powershell 'mvn install'
             }
         }
-    stage('Build image') {
-        steps {
-            docker.build("my-ubuntu-base")
+     stage('Build image') {
+            steps {
+                script {
+                    // Build the Docker image using the Dockerfile in the current directory
+                    docker.build("my-ubuntu-base")
+                }
+            }
         }
-    }
 
     }
 }
