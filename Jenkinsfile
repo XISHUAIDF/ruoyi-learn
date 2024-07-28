@@ -14,11 +14,8 @@ pipeline {
 
         stage('Build image') {
             steps{
-            
-                  app = docker.build("my-ubuntu-base")
+                  docker.build("my-ubuntu-base")
                   }
-      
-
       
     }
     }
