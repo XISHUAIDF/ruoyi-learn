@@ -12,7 +12,11 @@ pipeline {
             }
         }
 
-        stage('Build image') {steps{  app = docker.build("my-ubuntu-base")}
+        stage('Build image') {
+            steps{
+            
+                  app = docker.build("my-ubuntu-base")
+                  }
       
 
       
