@@ -11,13 +11,12 @@ pipeline {
                 powershell 'mvn install'
             }
         }
-
-        stage('Build image') {
-            steps{
-                  docker.build("my-ubuntu-base")
-                  }
-      
+    stage('Build image') {
+        steps {
+            docker.build("my-ubuntu-base")
+        }
     }
+
     }
 }
 
