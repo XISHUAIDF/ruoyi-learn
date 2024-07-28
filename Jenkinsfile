@@ -8,18 +8,7 @@ pipeline {
     stages {
         stage('Run Batch File') {
             steps {
-                echo 'Preparing to execute the batch file...'
-                
-                // Execute the batch script
-                bat """
-                echo -----------------------------------
-                echo Executing example.bat
-                echo -----------------------------------
-                call example.bat
-                echo -----------------------------------
-                echo Finished executing example.bat
-                echo -----------------------------------
-                """
+                powershell 'mvn install'
             }
         }
     }
